@@ -20,16 +20,15 @@ struct ContentView: View {
          */
         
         VStack(spacing: 20) {
-            Text("D o g   E a r")
-                .font(.custom("FatFrank-Heavy", size: 32))
-
-            Text("Author · Year · Pages")
-                .font(.custom("Mono45Headline-Regular", size: 18))
-
-            Text("This is body text in Proxima Nova Regular.")
-                .font(.custom("ProximaNova-Regular", size: 16))
+            Text("Background").padding().background(Color("Background"))
+            Text("Surface").padding().background(Color("Surface"))
+            Text("TextPrimary").foregroundColor(Color("TextPrimary"))
+            Text("Accent").foregroundColor(Color("Accent"))
+            Text("TextOnLight")
+                .padding()
+                .background(Color("TextPrimary"))
+                .foregroundColor(Color("TextOnLight"))
         }
-        .padding()
     }
 }
 
