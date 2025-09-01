@@ -32,14 +32,6 @@ struct SearchView: View {
                         .foregroundStyle(theme.background)
                         .tint(theme.background)
                     }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Search")
-                        .font(theme.title(25))
-                        .foregroundStyle(theme.headings)
-                }
-            }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
                     .background(
@@ -62,6 +54,14 @@ struct SearchView: View {
                     .foregroundStyle(theme.primary)
 
                     Spacer()
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Search")
+                        .font(theme.title(25))
+                        .foregroundStyle(theme.headings)
                 }
             }
         }
