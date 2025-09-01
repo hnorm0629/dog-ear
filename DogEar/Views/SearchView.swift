@@ -15,29 +15,33 @@ struct SearchView: View {
                 theme.background.ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // Search bar positioned right below toolbar
-                    HStack(spacing: 8) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(theme.background)
-
-                        TextField(
-                            "",
-                            text: $query,
-                            prompt: Text("Find books, authors, reviews…")
-                                .foregroundStyle(theme.background)
-                        )
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
-                        .foregroundStyle(theme.background)
-                        .tint(theme.background)
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .background(
+                    // Search bar (match Home tabs: height 32, small padding, body(15) text)
+                    ZStack {
                         RoundedRectangle(cornerRadius: 12, style: .continuous)
                             .fill(theme.primary)
-                    )
+
+                        HStack(spacing: 6) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 15))                  // not semibold
+                                .foregroundStyle(theme.background)
+
+                            TextField(
+                                "",
+                                text: $query,
+                                prompt: Text("Find books, authors, reviews…")
+                                    .foregroundStyle(theme.background)
+                                    .font(theme.body(15))
+                            )
+                            .font(theme.body(15))                        // match tab text
+                            .textInputAutocapitalization(.never)
+                            .disableAutocorrection(true)
+                            .foregroundStyle(theme.background)           // typed text color
+                            .tint(theme.background)                      // cursor color
+                        }
+                        .padding(.horizontal, 8)                         // small like tabs
+                        .padding(.vertical, 2)
+                    }
+                    .frame(height: 32)                                   // exact height
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
                     .padding(.bottom, 20)
