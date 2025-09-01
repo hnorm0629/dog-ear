@@ -82,8 +82,12 @@ struct SearchView: View {
 
                         } else {
                             List(vm.results) { book in
-                                BookRow(book: book, theme: theme)
-                                    .listRowBackground(Color.clear)
+                                NavigationLink {
+                                    BookDetailView(book: book)   // 👈 push detail screen
+                                } label: {
+                                    BookRow(book: book, theme: theme)
+                                }
+                                .listRowBackground(Color.clear)
                             }
                             .listStyle(.plain)
                             .scrollContentBackground(.hidden)
@@ -169,6 +173,151 @@ private struct BookRow: View {
             .fill(theme.primary.opacity(0.12))
     }
 }
+
+
+// MARK: - Book Detail (with real data)
+private struct BookDetailView: View {
+    @EnvironmentObject var theme: Theme
+    let book: Book
+
+    @StateObject private var vm: BookDetailViewModel
+
+    init(book: Book) {
+        self.book = book
+        _vm = StateObject(
+            wrappedValue: BookDetailViewModel(
+                service: OpenLibraryDetailService(),
+                workKey: book.id,
+                fallback: book // show basic info immediately, then upgrade
+            )
+        )
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+
+                // Header
+                HStack(alignment: .top, spacing: 16) {
+                    coverView
+                        .frame(width: 120, height: 170)
+                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(vm.detail?.title ?? book.title)
+                            .font(theme.title(22))
+                            .foregroundStyle(theme.primary)
+                            .lineLimit(3)
+
+                        Text("\(vm.detail?.author ?? book.author)\( (vm.detail?.year ?? book.year).map { " · \($0)" } ?? "")")
+                            .font(theme.body(15))
+                            .foregroundStyle(theme.primary.opacity(0.85))
+                            .lineLimit(2)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                // States
+                if vm.isLoading && vm.detail == nil {
+                    ProgressView()
+                        .tint(theme.primary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 8)
+                } else if let msg = vm.errorMessage, vm.detail == nil {
+                    Text(msg)
+                        .font(theme.body(15))
+                        .foregroundStyle(theme.primary.opacity(0.9))
+                }
+
+                // Description
+                if let desc = vm.detail?.description, !desc.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Overview")
+                            .font(theme.title(18))
+                            .foregroundStyle(theme.primary)
+                        Text(desc)
+                            .font(theme.body(15))
+                            .foregroundStyle(theme.primary.opacity(0.9))
+                            .lineSpacing(4)
+                    }
+                } else {
+                    // Optional placeholder
+                    Text("No description available.")
+                        .font(theme.body(15))
+                        .foregroundStyle(theme.primary.opacity(0.6))
+                }
+
+                // Subjects (chips)
+                if let subjects = vm.detail?.subjects, !subjects.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Subjects")
+                            .font(theme.title(18))
+                            .foregroundStyle(theme.primary)
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                ForEach(subjects.prefix(24), id: \.self) { s in
+                                    Text(s)
+                                        .font(theme.body(13))
+                                        .foregroundStyle(theme.primary)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 6)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                                .fill(theme.primary.opacity(0.12))
+                                        )
+                                }
+                            }
+                            .padding(.vertical, 2)
+                        }
+                    }
+                }
+
+                Spacer(minLength: 0)
+            }
+            .padding(16)
+        }
+        .background(theme.background.ignoresSafeArea())
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Book")
+                    .font(theme.title(25))
+                    .foregroundStyle(theme.headings)
+            }
+        }
+        .task { await vm.load() } // 🔹 fetch detail on appear
+    }
+
+    // MARK: Cover
+    private var coverView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(theme.primary.opacity(0.12))
+
+            if let url = (vm.detail?.coverURL ?? book.coverURL) {
+                AsyncImage(url: url, transaction: .init(animation: .easeOut(duration: 0.2))) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable().scaledToFill().transition(.opacity)
+                    case .empty, .failure(_):
+                        placeholder
+                    @unknown default:
+                        placeholder
+                    }
+                }
+            } else {
+                placeholder
+            }
+        }
+    }
+
+    private var placeholder: some View {
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+            .fill(theme.primary.opacity(0.12))
+    }
+}
+
 
 
 #Preview {
