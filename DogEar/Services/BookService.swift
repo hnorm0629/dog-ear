@@ -1,4 +1,0 @@
-//
-//  BookService.swift
-//  DogEar
-//

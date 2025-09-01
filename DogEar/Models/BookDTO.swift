@@ -1,5 +1,0 @@
-//
-//  BookDTO.swift
-//  DogEar
-//
-

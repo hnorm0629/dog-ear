@@ -8,7 +8,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var theme: Theme
 
-    private enum HomeTab: String, CaseIterable { case books = "Books", reviews = "Reviews", lists = "Lists" }
+    private enum HomeTab: String, CaseIterable { case books = "Books", reviews = "Reviews", lists = "Shelves" }
     @State private var tab: HomeTab = .books
     @Namespace private var tabNS
 
@@ -111,7 +111,7 @@ private struct ListsPane: View {
     let theme: Theme
     var body: some View {
         VStack(spacing: 8) {
-            Text("Curated Lists").font(theme.title(22)).foregroundStyle(theme.primary)
+            Text("Curated Shelves").font(theme.title(22)).foregroundStyle(theme.primary)
             Text("Staff picks, series orders, and seasonal themes.")
                 .font(theme.body(15)).foregroundStyle(theme.primary.opacity(0.75))
         }
