@@ -27,6 +27,7 @@
 		9ED86C512E656CF4002993D6 /* DogEar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogEar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED86C5E2E656CF6002993D6 /* DogEarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogEarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED86C682E656CF6002993D6 /* DogEarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DogEarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ED86CAB2E6576AE002993D6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		9ED86C482E656CF4002993D6 = {
 			isa = PBXGroup;
 			children = (
+				9ED86CAB2E6576AE002993D6 /* README.md */,
 				9ED86C532E656CF4002993D6 /* DogEar */,
 				9ED86C612E656CF6002993D6 /* DogEarTests */,
 				9ED86C6B2E656CF6002993D6 /* DogEarUITests */,
