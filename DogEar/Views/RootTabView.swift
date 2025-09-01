@@ -2,8 +2,6 @@
 //  RootTabView.swift
 //  DogEar
 //
-//  Created by Hannah Norman on 8/31/25.
-//
 
 import SwiftUI
 
@@ -29,6 +27,6 @@ struct RootTabView: View {
 
 #Preview {
     RootTabView()
-        .environmentObject(Theme())     // so your fonts/colors load
-        .preferredColorScheme(.dark)     // optional: see your palette in dark
+        .environmentObject(Theme())
+        .preferredColorScheme(.dark)
 }

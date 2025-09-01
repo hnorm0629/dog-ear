@@ -2,8 +2,6 @@
 //  DogEarTests.swift
 //  DogEarTests
 //
-//  Created by Hannah Norman on 8/31/25.
-//
 
 import Testing
 @testable import DogEar

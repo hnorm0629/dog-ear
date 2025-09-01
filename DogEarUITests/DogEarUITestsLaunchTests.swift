@@ -2,8 +2,6 @@
 //  DogEarUITestsLaunchTests.swift
 //  DogEarUITests
 //
-//  Created by Hannah Norman on 8/31/25.
-//
 
 import XCTest
 
