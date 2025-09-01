@@ -1,11 +1,11 @@
 //
-//  SearchView.swift
+//  ActivityView.swift
 //  DogEar
 //
 
 import SwiftUI
 
-struct SearchView: View {
+struct ActivityView: View {
     @EnvironmentObject var theme: Theme
 
     var body: some View {
@@ -14,9 +14,9 @@ struct SearchView: View {
                 theme.background.ignoresSafeArea()
 
                 VStack(spacing: 16) {
-                    Text("Search")
+                    Text("Activity")
                         .font(theme.title(28))
-                    Text("Type to find books, authors, series…")
+                    Text("See what your friends are reading and rating.")
                         .font(theme.body(16))
                 }
                 .padding()
@@ -24,7 +24,7 @@ struct SearchView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Search")
+                    Text("Activity")
                         .font(theme.title(25))
                         .foregroundStyle(theme.primary)
                 }
@@ -34,6 +34,8 @@ struct SearchView: View {
 }
 
 #Preview {
-    NavigationStack { SearchView() }
+    NavigationStack { ActivityView() }
         .environmentObject(Theme())
 }
+
+
