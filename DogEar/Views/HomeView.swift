@@ -29,7 +29,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Dog Ear")
                         .font(theme.title(25))
-                        .foregroundStyle(theme.primary)
+                        .foregroundStyle(theme.headings)
                 }
             }
         }

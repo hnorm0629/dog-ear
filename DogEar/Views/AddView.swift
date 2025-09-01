@@ -26,7 +26,7 @@ struct AddView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Add")
                         .font(theme.title(25))
-                        .foregroundStyle(theme.primary)
+                        .foregroundStyle(theme.headings)
                 }
             }
         }

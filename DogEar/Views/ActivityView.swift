@@ -26,7 +26,7 @@ struct ActivityView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Activity")
                         .font(theme.title(25))
-                        .foregroundStyle(theme.primary)
+                        .foregroundStyle(theme.headings)
                 }
             }
         }

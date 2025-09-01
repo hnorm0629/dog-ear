@@ -29,8 +29,6 @@ struct RootTabView: View {
             HomeView()
                 .tabItem {
                     Image(systemName: "books.vertical")
-                        .symbolVariant(selection == .home ? .fill : .none)
-                        .symbolRenderingMode(.monochrome)
                         .accessibilityLabel("Home")
                 }
                 .tag(Tab.home)
@@ -38,8 +36,6 @@ struct RootTabView: View {
             SearchView()
                 .tabItem {
                     Image(systemName: "magnifyingglass.circle")
-                        .symbolVariant(selection == .search ? .fill : .none)
-                        .symbolRenderingMode(.monochrome)
                         .accessibilityLabel("Search")
                 }
                 .tag(Tab.search)
@@ -47,8 +43,6 @@ struct RootTabView: View {
             AddView()
                 .tabItem {
                     Image(systemName: "plus.app")
-                        .symbolVariant(selection == .add ? .fill : .none)
-                        .symbolRenderingMode(.monochrome)
                         .accessibilityLabel("Add to Library")
                 }
                 .tag(Tab.add)
@@ -56,8 +50,6 @@ struct RootTabView: View {
             ActivityView()
                 .tabItem {
                     Image(systemName: "bolt")
-                        .symbolVariant(selection == .activity ? .fill : .none)
-                        .symbolRenderingMode(.monochrome)
                         .accessibilityLabel("Friends Activity")
                 }
                 .tag(Tab.activity)
@@ -65,7 +57,7 @@ struct RootTabView: View {
             ProfileView()
                 .tabItem {
                     Image(systemName: "person")
-                        .symbolVariant(selection == .profile ? .fill : .none)
+                        .symbolVariant(.none)
                         .symbolRenderingMode(.monochrome)
                         .accessibilityLabel("Profile")
                 }

@@ -12,6 +12,7 @@ final class Theme: ObservableObject {
     @Published var primary    = Color("TextPrimary")
     @Published var accent     = Color("Accent")
     @Published var textOnLight = Color("TextOnLight")
+    @Published var headings   = Color("Headings")
 
     // Fonts
     func title(_ size: CGFloat) -> Font {
